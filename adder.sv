@@ -1,4 +1,4 @@
-module adder#(parameter n = 4)(
+module Adder#(parameter n = 4)(
     input logic[n-1:0] A, M,
     output logic[n-1:0] Sum,
     output logic C );

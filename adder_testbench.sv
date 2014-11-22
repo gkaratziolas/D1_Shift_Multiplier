@@ -5,10 +5,10 @@ module adder_testbench;
     logic[n-1:0] A, M, Sum;
     logic C;
 
-    adder ADDER (.*);
+    Adder ADDER (.*);
 
 
-    always
+    initial
       begin
 	A = 0;
         M = 0;
