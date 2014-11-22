@@ -1,4 +1,4 @@
-module test_register
+module test_register;
 
     parameter n = 4;
     logic clock, reset, add, shift, C, Creg;
@@ -10,3 +10,4 @@ module test_register
         clock = 1'b0;
         forever #10ns clock = ~clock;
       end
+endmodule

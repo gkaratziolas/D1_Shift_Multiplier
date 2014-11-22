@@ -1,9 +1,9 @@
-module test_adder
+module test_adder;
 
     parameter n = 4;
 
     logic[n-1:0] A, M, Sum;
-    logic c;
+    logic clock, c;
 
     initial
       begin
@@ -13,5 +13,5 @@ module test_adder
 
 
 
-    adder ADDER (.*)
+    adder ADDER (.*);
 endmodule

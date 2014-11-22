@@ -1,9 +1,7 @@
-
-
 module Register#(parameter n = 4)(
     input logic clock, reset, add, shift, C,
     input logic[n-1:0] Qin, Sum,
-    output logic[n*2-1:0] QA );
+    output logic[n*2-1:0] AQ );
     
     logic Creg; //MSB carry bit storage
     
@@ -23,6 +21,6 @@ module Register#(parameter n = 4)(
         
         else if( shift )
           begin
-            {Creg, AQ} <= {1'b0, Creg, AQ[n*2-1:1]}
+            {Creg, AQ} <= {1'b0, Creg, AQ[n*2-1:1]};
           end
 endmodule

@@ -1,2 +1,3 @@
-module test_multiplier
+module test_multiplier;
 
+endmodule
