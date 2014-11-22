@@ -8,7 +8,7 @@ module Multiplier#(parameter n = 4)(
 
     Register REG(.*);
     Adder ADD(.A(AQ[2*n-1:n]), .M(M), .Sum(Sum), .C(C));
-    Sequencer SEQ(.*, .Q0(AQ[0]));
-    //Sequencer SEQ(.clock(clock), .start(start), .Q0(AQ[0]), .add(add), .shift(shift), .reset(reset), .ready(ready));
+    //Sequencer SEQ(.*, .Q0(AQ[0]));
+    Sequencer SEQ(.clock(clock), .start(start), .Q0(AQ[0]), .add(add), .shift(shift), .reset(reset), .ready(ready));
 
 endmodule

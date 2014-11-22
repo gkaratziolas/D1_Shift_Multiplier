@@ -1,8 +1,9 @@
 module Sequencer#(parameter n = 4)(
     input logic clock, start, Q0,
-    output logic add, shift, reset, ready);
+    output logic add, shift, reset, ready,
+    output logic[n-1:0] count);
     
-    logic [n-1:0] count; //would use sqrt(n), but that didn't work!
+    //logic [n-1:0] count; //would use sqrt(n), but that didn't work!
 
     enum {IDLE, ADDING, SHIFTING, STOPPED} STATE;
     
@@ -25,16 +26,16 @@ module Sequencer#(parameter n = 4)(
                 
             SHIFTING:
               begin
-                if( count > 0)
+                if( count == 0)
                     STATE <= STOPPED;
                 else
-                    STATE = ADDING;
+                    STATE <= ADDING;
               end
                     
             STOPPED:
               begin
                 if( start )
-                    STATE = IDLE;
+                    STATE <= IDLE;
               end
          endcase
       end
@@ -45,24 +46,29 @@ module Sequencer#(parameter n = 4)(
         add     = 1'b0;
         shift   = 1'b0;
         ready   = 1'b0;
+
         case( STATE )
             IDLE:
               begin
                 reset = 1'b1;
               end
+
             ADDING:
               begin
                 if( Q0 )
                     add = 1'b1;
               end
+
             SHIFTING:
               begin
                 shift = 1'b1;
               end
+
             STOPPED:
               begin
                 ready = 1'b1;
               end
+
 	endcase
       end
 endmodule
