@@ -8,67 +8,61 @@ module Sequencer#(parameter n = 4)(
     enum {IDLE, ADDING, SHIFTING, STOPPED} STATE;
     
     always_ff @( posedge clock )
-      begin:seq
+    begin:seq
         case( STATE )
             IDLE:
-              begin
+            begin
                 if( start )
-                  begin
+                begin
                     STATE <= ADDING;
                     count <= n;
-                  end         
-              end           
+                end         
+            end
             ADDING:
-              begin
+            begin
                 count = count - 1;
                 STATE <= SHIFTING;
-              end
-                
+            end  
             SHIFTING:
-              begin
+            begin
                 if( count == 0)
                     STATE <= STOPPED;
                 else
                     STATE <= ADDING;
-              end
-                    
+            end  
             STOPPED:
-              begin
+            begin
                 if( start )
                     STATE <= IDLE;
-              end
-         endcase
-      end
+            end
+        endcase
+    end
     
     always_comb
-      begin:comb
+    begin:comb
         reset   = 1'b0;
         add     = 1'b0;
         shift   = 1'b0;
         ready   = 1'b0;
-
+        
         case( STATE )
             IDLE:
-              begin
+            begin
                 reset = 1'b1;
-              end
-
+            end
             ADDING:
-              begin
+            begin
                 if( Q0 )
                     add = 1'b1;
-              end
-
+            end
             SHIFTING:
-              begin
+            begin
                 shift = 1'b1;
-              end
-
+            end
             STOPPED:
-              begin
+            begin
                 ready = 1'b1;
-              end
-
+            end
 	endcase
-      end
+    end
 endmodule
